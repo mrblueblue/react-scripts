@@ -18,7 +18,6 @@ const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
 const spawn = require('react-dev-utils/crossSpawn');
-const addons = require("../config/addon-dependencies")
 
 module.exports = function(
   appPath,
