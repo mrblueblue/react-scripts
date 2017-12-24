@@ -18,7 +18,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
 const spawn = require('react-dev-utils/crossSpawn');
-const dependencies = require("../config/dependencies")
+const addons = require("../config/addon-dependencies")
 
 module.exports = function(
   appPath,
@@ -27,6 +27,10 @@ module.exports = function(
   originalDirectory,
   template
 ) {
+  console.log("*************")
+  console.log(appPath)
+  console.log("*************")
+
   const ownPackageName = require(path.join(__dirname, '..', 'package.json'))
     .name;
   const ownPath = path.join(appPath, 'node_modules', ownPackageName);
@@ -100,7 +104,7 @@ module.exports = function(
     command = 'npm';
     args = ['install', '--save', verbose && '--verbose'].filter(e => e);
   }
-  args.push(...dependencies);
+  args.push('react', 'react-dom');
 
   // Install additional template dependencies, if present
   const templateDependenciesPath = path.join(
