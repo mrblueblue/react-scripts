@@ -26,6 +26,10 @@ module.exports = function(
   originalDirectory,
   template
 ) {
+  console.log("*************")
+  console.log(appPath)
+  console.log("*************")
+
   const ownPackageName = require(path.join(__dirname, '..', 'package.json'))
     .name;
   const ownPath = path.join(appPath, 'node_modules', ownPackageName);
