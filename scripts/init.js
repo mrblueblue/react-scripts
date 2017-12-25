@@ -34,10 +34,6 @@ module.exports = function(
   originalDirectory,
   template
 ) {
-  console.log("*************")
-  console.log(appPath)
-  console.log("*************")
-
   const ownPackageName = require(path.join(__dirname, '..', 'package.json'))
     .name;
   const ownPath = path.join(appPath, 'node_modules', ownPackageName);
@@ -46,6 +42,7 @@ module.exports = function(
 
   // Copy over some of the devDependencies
   appPackage.dependencies = appPackage.dependencies || {};
+  appPackage.devDependencies = appPackage.devDependencies || {};
 
   // Setup the script rules
   appPackage.scripts = {
@@ -53,6 +50,8 @@ module.exports = function(
     build: 'react-scripts build',
     test: 'react-scripts test --env=jsdom',
     eject: 'react-scripts eject',
+    gen: 'node scripts/generator/index.js',
+    pretty: 'prettier --write ./src/*.js ./src/**/*.js'
   };
 
   fs.writeFileSync(
@@ -130,7 +129,22 @@ module.exports = function(
       console.log();
 
       run(command, args);
+
+      const templateDevDeps = require(templateDependenciesPath).devDependencies
+      if (templateDevDeps) {
+        console.log(`Installing template devDependencies using yarn...`);
+        console.log();
+
+        if (useYarn) {
+          run("yarnpkg", ["add", "--dev"].concat(
+            Object.keys(templateDevDeps).map(key => {
+              return `${key}@${templateDevDeps[key]}`;
+            })
+          ))
+        }
+      }
     }
+
     fs.unlinkSync(templateDependenciesPath);
   }
 
