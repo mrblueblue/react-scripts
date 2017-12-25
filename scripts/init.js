@@ -130,7 +130,26 @@ module.exports = function(
       console.log();
 
       run(command, args);
+
+      const templateDevDeps = require(templateDependenciesPath).devDependencies
+      if (templateDevDeps) {
+        console.log(`Installing template devDependencies using yarn...`);
+        console.log();
+
+        if (useYarn) {
+          run("yarnpkg", ["add", "--dev"].concat(
+            Object.keys(templateDevDeps).map(key => {
+              return `${key}@${templateDevDeps[key]}`;
+            })
+          ))
+        }
+      }
     }
+
+
+
+
+
     fs.unlinkSync(templateDependenciesPath);
   }
 
