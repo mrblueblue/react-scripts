@@ -34,10 +34,6 @@ module.exports = function(
   originalDirectory,
   template
 ) {
-  console.log("*************")
-  console.log(appPath)
-  console.log("*************")
-
   const ownPackageName = require(path.join(__dirname, '..', 'package.json'))
     .name;
   const ownPath = path.join(appPath, 'node_modules', ownPackageName);
@@ -54,6 +50,8 @@ module.exports = function(
     build: 'react-scripts build',
     test: 'react-scripts test --env=jsdom',
     eject: 'react-scripts eject',
+    gen: 'node scripts/generator/index.js',
+    pretty: 'prettier --write ./src/*.js ./src/**/*.js'
   };
 
   fs.writeFileSync(
