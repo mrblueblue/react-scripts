@@ -46,6 +46,7 @@ module.exports = function(
 
   // Copy over some of the devDependencies
   appPackage.dependencies = appPackage.dependencies || {};
+  appPackage.devDependencies = appPackage.devDependencies || {};
 
   // Setup the script rules
   appPackage.scripts = {
@@ -145,10 +146,6 @@ module.exports = function(
         }
       }
     }
-
-
-
-
 
     fs.unlinkSync(templateDependenciesPath);
   }
