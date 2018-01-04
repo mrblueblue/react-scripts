@@ -11,3 +11,22 @@ Please refer to its documentation:
 ```
 create-react-app --scripts-version git+https://github.com/mrblueblue/react-scripts.git <app_name>
 ```
+
+### Generator Scripts
+
+The application will have access to several generator scripts that speed-up development. They are:
+
+
+```bash
+npm run gen -- --c $NAME
+# creates a basic class component
+
+npm run gen -- --cc $NAME
+# creates a Redux connected commponent
+
+npm run gen -- --r $NAME
+# creates a pair of Redux action/reducer
+
+npm run gen -- --a $NAME
+# creates a Redux action file
+```
